@@ -17,11 +17,6 @@ namespace StringCalculatorNF
         {
             try
             {
-                //Test();
-                //return;
-
-
-
                 var getDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 string logFileFullPath = string.Format(@"{0}\{1}", getDirectory, "log.txt");
 
@@ -53,17 +48,6 @@ namespace StringCalculatorNF
 
 
                 var questions = new List<string>();
-                //questions.Add("( )");
-                //questions.Add(")(");
-                //questions.Add("))(");
-                //questions.Add("))((");
-                //questions.Add("()(");
-                //questions.Add("()()");
-                //questions.Add("()(()()");
-                //questions.Add("(())");
-                //questions.Add("((())");
-                //questions.Add("(1 + 1)");
-
                 questions.Add("1 + 1");
                 questions.Add("2 * 2");
                 questions.Add("1 + 2 + 3");
@@ -72,13 +56,6 @@ namespace StringCalculatorNF
                 questions.Add("11.1 + 23"); // 34.1
                 questions.Add("1 + 1 * 3"); // 4
 
-
-                //questions.Add("1 + 2 * 3 * 4"); //25
-                //questions.Add("1 * 3 + 2 * 3 * 4"); // 27
-                //questions.Add("1*5 + 6 * 3+2 * 4+9"); //40
-                //questions.Add("7 - 8 - 9"); //-10
-                //questions.Add("7 - 8 + 9"); //8
-
                 customLogger.WriteLog("*** GROUP 1 QUESTIONS (No bracket) ***");
                 foreach (var question in questions)
                 {
@@ -86,18 +63,10 @@ namespace StringCalculatorNF
                     //Console.WriteLine();
                 }
 
-                
-
                 var questions2 = new List<string>();
                 questions2.Add("( 11.5 + 15.4 ) + 10.1"); // 37.0
                 questions2.Add("23 - ( 29.3 - 12.5 )"); //6.2
                 questions2.Add("( 1 / 2 ) - 1 + 1"); //0.5
-                //questions2.Add("2 + 3 * 2");
-
-
-                //questions2.Add("10 - ( 2 + 3 * 2 )"); //2
-
-                //questions2.Add("10 - ( 2 + 3 * ( 7 - 5 ) * ( 3 - 1 ) )"); // -4
 
                 customLogger.WriteLog(System.Environment.NewLine);
                 customLogger.WriteLog("*** GROUP 2 QUESTIONS (With Brackets) ***");
@@ -133,24 +102,6 @@ namespace StringCalculatorNF
             }
 
         }
-
-        static void Test()
-        {
-            ILogger myLogger = new ConsoleLogger();
-         
-            CustomLogger customLogger = new CustomLogger(myLogger);
-            StringCalculator stringCalculator = new StringCalculator(myLogger);
-
-            var questions = new List<string>();
-            questions.Add("7 - 8 - 9"); //-10
-            questions.Add("7 - 8 + 9"); //8
-
-            foreach (var question in questions)
-            {
-                var result = stringCalculator.Calculate(question);
-            }
-        }
-
     }
     
 }
