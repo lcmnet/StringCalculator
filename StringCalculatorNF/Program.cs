@@ -48,6 +48,9 @@ namespace StringCalculatorNF
 
 
                 var questions = new List<string>();
+
+                var newInput = "( 1.1 - 1 ) + ( ( 1 + 1 ) * ( 1.1 * 1 ) )";
+                questions.Add(newInput);
                 questions.Add("1 + 1");
                 questions.Add("2 * 2");
                 questions.Add("1 + 2 + 3");
