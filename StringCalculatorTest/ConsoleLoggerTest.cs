@@ -25,17 +25,17 @@ namespace StringCalculatorTest
         [Test]
         public void TestForPassOnWriteLog()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                string expected = "I am testing if I write correctly";
-                _customLogger.WriteLog(expected);
+            StringWriter sw = new StringWriter();
 
-                string extractLog = sw.ToString();
-                int foundIndex = extractLog.IndexOf(expected);
+            Console.SetOut(sw);
+            string expected = "I am testing if I write correctly";
+            _customLogger.WriteLog(expected);
 
-                Assert.IsTrue(foundIndex > 0);
-            }
+            string extractLog = sw.ToString();
+            int foundIndex = extractLog.IndexOf(expected);
+
+            Assert.IsTrue(foundIndex > 0);
+
             
         }
     }
