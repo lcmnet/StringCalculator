@@ -84,7 +84,7 @@ namespace StringCalculatorNF.Util
                     int i = tmp.IndexOf(OperatorSymbol.CloseBracket);
                     string tmp2 = tmp.Substring(0, i);
 
-                    nextIndexOfCloseBracket = nextIndexOfCloseBracket + tmp2.Length + 2 + 1;
+                    nextIndexOfCloseBracket = lastIndexOfOpenBracket + tmp2.Length + 1;
                 }
                 indexOfCorrespondingCloseBracket = nextIndexOfCloseBracket;
 
@@ -93,8 +93,8 @@ namespace StringCalculatorNF.Util
             catch 
             {
                 throw;
-            }
-            
+            }  
+
         }
     }
 

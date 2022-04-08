@@ -75,6 +75,13 @@ namespace StringCalculatorTest
             var index = StringUtil.GetIndexOfCorrespondingCloseBracket(input);
 
             Assert.AreEqual(index, 15);
+
+            string input2 = "( 1.1 - 1 ) + ( ( 1 + 1 ) * ( 1.1 * 1 ) )";
+            var index2 = StringUtil.GetIndexOfCorrespondingCloseBracket(input2);
+
+            Assert.AreEqual(index2, 38);
         }
+
+       
     }
 }
