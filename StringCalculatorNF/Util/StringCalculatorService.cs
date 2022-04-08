@@ -30,7 +30,7 @@ namespace StringCalculatorNF.Util
             string frontBalanceInput = string.Empty;
             if (lastIndexOfOpenBracket >= 0 && indexOfCorrespondingCloseBracket >= 0)
             {
-                extractedInput = input.Substring(lastIndexOfOpenBracket + 1, indexOfCorrespondingCloseBracket - lastIndexOfOpenBracket - 1);
+                extractedInput = input.Substring(lastIndexOfOpenBracket + 1, indexOfCorrespondingCloseBracket - lastIndexOfOpenBracket - 1);  
                 var splited = extractedInput.Split(OperatorSymbol.AllowedOperators);
                 bool needAddParenthesis = false;
                 if (splited.Length > 2)
@@ -54,41 +54,11 @@ namespace StringCalculatorNF.Util
             }
 
             var finalExactedInput = extractedInput;
-            char useOperator = '\0';
-            if (extractedInput.Contains(OperatorSymbol.Divide))
-            {
-                useOperator = OperatorSymbol.Divide;
-            }
-            else if (extractedInput.Contains(OperatorSymbol.Multiply))
-            {
-                useOperator = OperatorSymbol.Multiply;
-            }
-            else if (extractedInput.Contains(OperatorSymbol.Addition) || extractedInput.Contains(OperatorSymbol.Subtraction))
-            {
-                //check for which one to do first;
-                int indexForAdd = extractedInput.IndexOf(OperatorSymbol.Addition);
-                int indexForSubtract = extractedInput.IndexOf(OperatorSymbol.Subtraction);
-
-                if (indexForAdd < 0)
-                {
-                    useOperator = OperatorSymbol.Subtraction;
-                }
-                else
-                {
-                    if (indexForSubtract < indexForAdd && indexForSubtract > 0)
-                    {
-                        useOperator = OperatorSymbol.Subtraction;
-                    }
-                    else
-                    {
-                        useOperator = OperatorSymbol.Addition;
-                    }
-                }
-            }
-            finalExactedInput = frontBalanceInput + this.CalculateString(finalExactedInput, useOperator, remainderInput);
-
+            char useOperator = FindOperator(extractedInput);
+            var counted = this.CalculateString(finalExactedInput, useOperator, remainderInput);
+            finalExactedInput = frontBalanceInput + counted;
             return finalExactedInput;
-        }
+        } 
 
         private string CalculateString(string extractedInput, char operation, string backBalanceInput)
         {
@@ -196,5 +166,44 @@ namespace StringCalculatorNF.Util
                 throw;
             }
         }
+
+        private char FindOperator(string extractedInput)
+        {
+            char useOperator = '\0';
+            if (extractedInput.Contains(OperatorSymbol.Divide))
+            {
+                useOperator = OperatorSymbol.Divide;
+            }
+            else if (extractedInput.Contains(OperatorSymbol.Multiply))
+            {
+                useOperator = OperatorSymbol.Multiply;
+            }
+            else if (extractedInput.Contains(OperatorSymbol.Addition) || extractedInput.Contains(OperatorSymbol.Subtraction))
+            {
+                //check for which one to do first;
+                int indexForAdd = extractedInput.IndexOf(OperatorSymbol.Addition);
+                int indexForSubtract = extractedInput.IndexOf(OperatorSymbol.Subtraction);
+
+                if (indexForAdd < 0)
+                {
+                    useOperator = OperatorSymbol.Subtraction;
+                }
+                else
+                {
+                    if (indexForSubtract < indexForAdd && indexForSubtract > 0)
+                    {
+                        useOperator = OperatorSymbol.Subtraction;
+                    }
+                    else
+                    {
+                        useOperator = OperatorSymbol.Addition;
+                    }
+                }
+            }
+
+            return useOperator;
+        }
+
+
     }
 }
